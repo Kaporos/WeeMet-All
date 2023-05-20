@@ -1,0 +1,55 @@
+[simulation]
+step = 1e-7
+warmup = 0.0020 #Time to wait before starting actual simulation. When 0 you will see the system "starting"
+
+
+[simulation.csv]
+time = 0.000200
+xOffset = 0 # DOES NOT WORK RIGHT NOW. 
+outputDir = "csv_output"
+
+## Theses lines are complex. They allow you to wait for a bloc to reach a certain value to start recording to csv. usefull to align with existing mesures 
+shouldWaitFor = false
+waitValue = 2.38 # Value you wanna wait for 
+waitItem = "inductor1" # Bloc name can be "inductor" | "crete" | "soustractor" followed by inductance number (STARTING FROM 1) 
+precision = 0.05 # The precision :D
+
+[global]
+vdd = 4.13 # Global alimentation of the circuit.
+
+
+[oscillator]
+frequency = 50000
+capacity = 1e-5
+shown = true #If you dont wanna see the oscillator, put false here.
+
+[crete]
+resistor = 100_000
+capacity = 1e-6
+
+# Theses resistances are respectively: R4 is the FIRST resistance of the V+ potentiometer (The closest resistance of the Vz )
+# And R1 is the first resistance before Vin- (not the one going to the ground.)
+[soustractor]
+r4 = 19_721.6
+r1 = 1565.99
+
+# Below this line, you can have as many inductances as you want. Just duplicate the config, and adapt the name (inducances-3, etc...)
+# false and true are if you wanna see them on the simulation or not :)
+# vmax and vmin are lines on the bounds of the inductance rl circuit.
+
+
+[inductances-1]
+value = 0.00080
+rl = true
+soustractor = false
+crete = false
+vmax = false
+vmin = false
+
+[inductances-2]
+value = 0.00089
+rl = true
+soustractor = false
+crete = false
+vmax = false
+vmin = false
